@@ -44,7 +44,7 @@ const Login = (props) => {
     isValid: false,
   });
 
-  const authcxt = useContext(AuthContext);
+  const cxt = useContext(AuthContext);
 
   // saving emailIsValid based on emailState.isValid. >>>> const { someProperty } = someObject;
   const { isValid: emailIsValid } = emailState;
@@ -90,8 +90,8 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    authcxt.onLogin(emailState.value, passwordState.value);
-  };
+    cxt.onLogin(emailState.value, passwordState.value);
+    };
 
   return (
     <Card className={classes.login}>
