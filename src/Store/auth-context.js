@@ -6,18 +6,19 @@ const AuthContext = React.createContext({
   onLogin: (email, password) => {},
 });
 
+// useEffect execute the function ONLY if the dependencies in [] are changed. Its main jog is to avoid side effects
+// we should add "everything" we use in the effect function as a dependency if those "things" could change because your component (or some parent component) re-rendered.
+// but...DON'T need to add state updating functions, DON'T need to add "built-in" APIs or functions, DON'T need to add variables or functions
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect execute the function ONLY if the dependencies in [] are changed. Its main jog is to avoid side effects
-  // we should add "everything" we use in the effect function as a dependency if those "things" could change because your component (or some parent component) re-rendered.
-  // but...DON'T need to add state updating functions, DON'T need to add "built-in" APIs or functions, DON'T need to add variables or functions
   useEffect(() => {
-    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn"); // featch it locally.
-    if (storedUserLoggedInInformation === 1) {
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+
+    if (storedUserLoggedInInformation === "1") {
       setIsLoggedIn(true);
     }
-  }, []); // open dependency run make the useEffect runs once.
+  }, []);
 
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
@@ -25,7 +26,7 @@ export const AuthContextProvider = (props) => {
   };
 
   const loginHandler = () => {
-    localStorage.setItem("isLoggedIn", "1"); // store locally to be fetch later.
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
 
