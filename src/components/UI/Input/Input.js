@@ -4,6 +4,7 @@ import classes from "./Input.module.css";
 // ref is coming from the red when it is called in Login.js
 const Input = React.forwardRef((props, ref) => {
   const inputRef = useRef();
+
   const activate = () => {
     inputRef.current.focus();
   };
@@ -12,7 +13,7 @@ const Input = React.forwardRef((props, ref) => {
   useImperativeHandle(ref, () => {
     return {
       focus: activate
-    }
+    };
   });
 
   return (
